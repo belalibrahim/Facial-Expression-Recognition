@@ -1,14 +1,13 @@
 from core import load_testing_dataframe, view_image
 from model import get_model, saved_weights_name
 
-imgs = load_testing_dataframe()
+imgs, expected = load_testing_dataframe()
 
 model = get_model()
 model.load_weights(saved_weights_name)
 
-testing_imgs = imgs[50:70]
-
-predictions = model.predict(testing_imgs)
+predictions = model.predict_classes(imgs)
 print(predictions.shape)
-for img, prediction in zip(testing_imgs, predictions):
+print(predictions)
+for img, prediction in zip(imgs, predictions):
     view_image(img, prediction)

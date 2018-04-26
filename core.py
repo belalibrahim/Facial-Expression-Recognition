@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from keras.utils import np_utils
+from keras.utils import to_categorical
 from matplotlib import pyplot as plt
 
 
@@ -21,7 +21,7 @@ def load_training_dataframe(location: str = "Datasets/train.csv"):
     df['pixels'] = extract_images(df['pixels'])
     df = df.dropna()
     x_train = get_image_values(df['pixels'])
-    y_train = np_utils.to_categorical(df['emotion'].values, 7)
+    y_train = to_categorical(df['emotion'].values, 2)
     return x_train, y_train
 
 
@@ -34,13 +34,13 @@ def load_testing_dataframe(location: str = "Datasets/test.csv"):
     df['pixels'] = extract_images(df['pixels'])
     df = df.dropna()
     x_train = get_image_values(df['pixels'])
-    return x_train
+    y_train = to_categorical(df['emotion'].values, 2)
+    return x_train, y_train
 
 
 def view_image(image_arr, xs=None):
     arr = np.array(image_arr, dtype=np.uint8)
     arr.resize((48, 48))
     plt.imshow(arr, cmap='gray')
-    for i in range(0, len(xs) - 1, 2):
-        plt.scatter(xs[i], xs[i + 1], s=200, facecolors='none', edgecolors='r')
+    plt.title(xs)
     plt.show()

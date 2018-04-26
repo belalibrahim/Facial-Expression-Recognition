@@ -20,10 +20,7 @@ history = model.fit(images, predictions,
                     batch_size=batch_size,
                     epochs=epochs,
                     shuffle=True,
-                    validation_split=0.2,
+                    validation_split=0.4,
                     callbacks=[checkpoint,
                                csv_logger,
                                early_stop])
-
-# model.save_weights(saved_weights_name)
-# score = model.evaluate(X_test, Y_test, verbose=0)
