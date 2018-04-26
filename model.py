@@ -2,10 +2,10 @@ import keras
 from keras.models import Sequential
 from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
-from keras.optimizers import rmsprop, SGD
+from keras.optimizers import Adam
 
-# saved_weights_name = 'CNN_Weights.h5'
-saved_weights_name = 'SVM_Weights.h5'
+saved_weights_name = 'CNN_Weights.h5'
+# saved_weights_name = 'SVM_Weights.h5'
 images_shape = (48, 48, 1)
 
 
@@ -50,7 +50,7 @@ def get_cnn() -> Sequential:
     model.add(Dense(2, activation='softmax'))
 
     model.summary()
-    model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=["accuracy"])
+    model.compile(optimizer=Adam(lr=0.0001), loss='categorical_crossentropy', metrics=["accuracy"])
     return model
 
 

@@ -15,8 +15,8 @@ checkpoint = ModelCheckpoint(saved_weights_name,
 csv_logger = CSVLogger('ModelLogger.csv')
 early_stop = EarlyStopping(patience=3, monitor='val_loss')
 
-# model = get_model('CNN')
-model = get_model('SVM')
+model = get_model('CNN')
+# model = get_model('SVM')
 
 history = model.fit(images, predictions,
                     epochs=epochs,
@@ -27,5 +27,5 @@ history = model.fit(images, predictions,
                                early_stop])
 
 score = model.evaluate(images, predictions)
-print('Test Loss: ', score[0])
-print('Test Accuracy: ', score[1]*100)
+print('Train Loss: ', score[0])
+print('Train Accuracy: ', score[1]*100)
