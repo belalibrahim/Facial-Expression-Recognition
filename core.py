@@ -8,11 +8,14 @@ def extract_images(image):
     return image.apply(lambda image: np.fromstring(image, sep=' '))
 
 
-def get_image_values(image):
-    return np.vstack(image.values).astype(np.float32).reshape(-1, 48, 48, 1)
+def get_image_values(image,model):
+    if(model):
+        return np.vstack(image.values).astype(np.float32).reshape(-1, 48*48)
+    else:
+        return np.vstack(image.values).astype(np.float32).reshape(-1, 48*48)
 
 
-def load_training_dataframe(location: str = "Datasets/train.csv"):
+def load_training_dataframe(location: str = "Datasets/train.csv",model = 0):
     """
     :param location:
     :return: tuple (x.y) where x is image array and y is the predictions
@@ -20,12 +23,12 @@ def load_training_dataframe(location: str = "Datasets/train.csv"):
     df = pd.read_csv(location)
     df['pixels'] = extract_images(df['pixels'])
     df = df.dropna()
-    x_train = get_image_values(df['pixels'])
+    x_train = get_image_values(df['pixels'],model)
     y_train = to_categorical(df['emotion'].values, 2)
     return x_train, y_train
 
 
-def load_testing_dataframe(location: str = "Datasets/test.csv"):
+def load_testing_dataframe(location: str = "Datasets/test.csv",model = 0):
     """
     :param location:
     :return:  x where x is image array
@@ -33,7 +36,7 @@ def load_testing_dataframe(location: str = "Datasets/test.csv"):
     df = pd.read_csv(location)
     df['pixels'] = extract_images(df['pixels'])
     df = df.dropna()
-    x_train = get_image_values(df['pixels'])
+    x_train = get_image_values(df['pixels'],model)
     y_train = to_categorical(df['emotion'].values, 2)
     return x_train, y_train
 
