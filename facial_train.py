@@ -14,7 +14,7 @@ checkpoint = ModelCheckpoint(saved_weights_name,
                              save_best_only=True,
                              )
 csv_logger = CSVLogger('v.csv')
-model = get_model()
+model = get_model('SVM')
 early_stop = EarlyStopping(patience=3, monitor='val_loss')
 history = model.fit(images, predictions,
                     batch_size=batch_size,

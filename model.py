@@ -26,28 +26,28 @@ def get_cnn() -> Sequential:
 
     # !- may kernel size cause crash if it did replace it with (3,3,1)
     # first conv layer
-    model.add(Conv2D(32, 3, activation='sigmoid', input_shape=images_shape))
+    model.add(Conv2D(32, 5, activation='relu', input_shape=images_shape))
     model.add(MaxPooling2D(2))
 
     # second conv layer
-    model.add(Conv2D(64, 3, activation='sigmoid'))
+    model.add(Conv2D(64, 5, activation='relu'))
     model.add(MaxPooling2D(2))
 
     # third conv layer
-    model.add(Conv2D(128, 3, activation='sigmoid'))
+    model.add(Conv2D(128, 3, activation='relu'))
     model.add(MaxPooling2D(2))
 
     # fourth layer
-    model.add(Conv2D(256, 2, activation='sigmoid'))
+    model.add(Conv2D(256, 2, activation='relu'))
     model.add(MaxPooling2D(2))
 
     # flatten the layers
     model.add(Flatten())
 
     # add fully connected layers
-    model.add(Dense(1024, activation='sigmoid'))
-    model.add(Dense(512, activation='sigmoid'))
-    model.add(Dense(7, activation='softmax'))
+    model.add(Dense(1024, activation='relu'))
+    model.add(Dense(512, activation='relu'))
+    model.add(Dense(2, activation='softmax'))
 
     model.summary()
     model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=["accuracy"])
@@ -75,4 +75,30 @@ def get_svm() -> Sequential:
 
     # TODO: Build SVM model
 
+    # first conv layer
+    model.add(Conv2D(32, 5, activation='relu', input_shape=images_shape))
+    model.add(MaxPooling2D(2))
+
+    # second conv layer
+    model.add(Conv2D(64, 5, activation='relu'))
+    model.add(MaxPooling2D(2))
+
+    # third conv layer
+    model.add(Conv2D(128, 3, activation='relu'))
+    model.add(MaxPooling2D(2))
+
+    # fourth layer
+    model.add(Conv2D(256, 2, activation='relu'))
+    model.add(MaxPooling2D(2))
+
+    # flatten the layers
+    model.add(Flatten())
+
+    # add fully connected layers
+    model.add(Dense(1024, activation='relu'))
+    model.add(Dense(512, activation='relu'))
+    model.add(Dense(2, W_regularizer=keras.regularizers.l2(0.01)))
+
+    model.summary()
+    model.compile(optimizer='adam', loss='categorical_hinge', metrics=["accuracy"])
     return model
