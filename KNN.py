@@ -62,6 +62,6 @@ for k in range(k_max):
 
 plt.plot(history[0],history[1])
 plt.xlabel("K")
-plt.ylabel("validation accurecy")
-plt.title("accuersy ")
+plt.ylabel("validation Accuracy")
+plt.title("Accuracy ")
 plt.show()
