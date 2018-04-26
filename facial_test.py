@@ -3,8 +3,8 @@ from model import *
 
 imgs, actual = load_testing_dataframe()
 
-# model = get_model('CNN')
-model = get_model('SVM')
+model = get_model('CNN')
+# model = get_model('SVM')
 
 model.load_weights(saved_weights_name)
 
