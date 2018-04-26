@@ -12,7 +12,7 @@ def get_image_values(image,model):
     if(model):
         return np.vstack(image.values).astype(np.float32).reshape(-1, 48*48)
     else:
-        return np.vstack(image.values).astype(np.float32).reshape(-1, 48*48)
+        return np.vstack(image.values).astype(np.float32).reshape(-1, 48,48,1)
 
 
 def load_training_dataframe(location: str = "Datasets/train.csv",model = 0):
