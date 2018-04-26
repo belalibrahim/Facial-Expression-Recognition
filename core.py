@@ -38,9 +38,18 @@ def load_testing_dataframe(location: str = "Datasets/test.csv"):
     return x_train, y_train
 
 
-def view_image(image_arr, xs=None):
+def view_image(image_arr, actual=None, prediction=None):
     arr = np.array(image_arr, dtype=np.uint8)
     arr.resize((48, 48))
     plt.imshow(arr, cmap='gray')
-    plt.title(xs)
+    if prediction == 0:
+        pred = 'Happy'
+    else:
+        pred = "Sad"
+
+    if actual[1] == 0:
+        act = 'Happy'
+    else:
+        act = "Sad"
+    plt.title('Actual: ' + str(act) + '  Prediction: ' + str(pred))
     plt.show()

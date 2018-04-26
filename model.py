@@ -4,7 +4,8 @@ from keras.layers import Dense, Dropout, Flatten
 from keras.layers import Conv2D, MaxPooling2D
 from keras.optimizers import rmsprop, SGD
 
-saved_weights_name = 'Weights.h5'
+# saved_weights_name = 'CNN_Weights.h5'
+saved_weights_name = 'SVM_Weights.h5'
 images_shape = (48, 48, 1)
 
 
@@ -12,7 +13,6 @@ def get_model(model: str = 'CNN') -> Sequential:
 
     return {
         'CNN': get_cnn,
-        'KNN': get_knn,
         'SVM': get_svm,
     }[model]()
 
@@ -54,18 +54,6 @@ def get_cnn() -> Sequential:
     return model
 
 
-def get_knn() -> Sequential:
-    """
-
-    :rtype: Sequential
-    """
-    model = Sequential()
-
-    # TODO: Build KNN model
-
-    return model
-
-
 def get_svm() -> Sequential:
     """
 
@@ -97,7 +85,7 @@ def get_svm() -> Sequential:
     # add fully connected layers
     model.add(Dense(1024, activation='relu'))
     model.add(Dense(512, activation='relu'))
-    model.add(Dense(2, W_regularizer=keras.regularizers.l2(0.01)))
+    model.add(Dense(2, kernel_regularizer=keras.regularizers.l2(0.01)))
 
     model.summary()
     model.compile(optimizer='adam', loss='categorical_hinge', metrics=["accuracy"])
